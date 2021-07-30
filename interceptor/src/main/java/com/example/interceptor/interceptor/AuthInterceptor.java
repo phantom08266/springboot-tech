@@ -30,6 +30,10 @@ public class AuthInterceptor implements HandlerInterceptor {
                 .orElseThrow(() ->new AuthException("로그인된 사용자가 아닙니다."));
 
         String userName = httpSession.getAttribute("userId").toString();
+        if (userName == null) {
+            System.out.println("로그인된 사용자가 아닙니다.");
+            throw new RuntimeException("로그인 해주세요.");
+        }
         System.out.println("안녕하세요~ " + userName + "님.");
         return true;
     }
